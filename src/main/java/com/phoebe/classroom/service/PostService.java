@@ -10,7 +10,6 @@ import com.phoebe.classroom.service.model.Post;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.List;
-import java.util.Optional;
 
 @Stateless
 public class PostService {
@@ -20,7 +19,7 @@ public class PostService {
     @Inject
     private PostMapper postMapper;
 
-    public List<Post> getAllPost() {
+    public List<Post> getAllPosts() {
         return postMapper.toDtoList(postDAO.findAll());
     }
 

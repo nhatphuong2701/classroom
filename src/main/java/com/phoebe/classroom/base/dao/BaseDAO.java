@@ -4,6 +4,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,15 +17,27 @@ public abstract class BaseDAO<E> {
 
     private Class<E> entityClass;
 
-    public List<E> findAll() {
-        return em.createQuery("SELECT e FROM " + entityClass.getSimpleName() + " e",entityClass).getResultList();
+    public E create(E entity) {
+        this.em.persist(entity);
+        return entity;
+    }
+
+    public E update(E entity) {
+        return this.em.merge(entity);
     }
 
     public Optional<E> findById(Long id) {
-        List<E> entityList = em
-                .createQuery("SELECT e FROM " + entityClass.getSimpleName() + " WHERE e.id = :id",entityClass)
-                .setParameter("id", id)
-                .getResultList();
-        return entityList.isEmpty() ? Optional.empty() :Optional.of(entityList.get(0));
+        return Optional.of(em.find(entityClass, id));
+    }
+
+    public List<E> findAll() {
+
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+
+        CriteriaQuery<E> cq = cb.createQuery(entityClass);
+        Root<E> root = cq.from(entityClass);
+        cq.select(root);
+
+        return em.createQuery(cq).getResultList();
     }
 }

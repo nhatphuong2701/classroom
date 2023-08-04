@@ -8,8 +8,10 @@
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL81Dialect"/>
             <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.physical_naming_strategy"
-                      value="org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy"/>
+            value="org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy"/>
         </properties>
     </persistence-unit>
 </persistence>

@@ -1,9 +1,19 @@
 package com.phoebe.classroom.entity;
 
-import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 @Entity
@@ -20,7 +30,6 @@ public class CommentEntity {
 
     private String attachment;
 
-    @CreationTimestamp
     @Column(nullable = false)
     private LocalDateTime commentTime;
 
@@ -30,8 +39,4 @@ public class CommentEntity {
     @ManyToOne
     @JoinColumn(name = "post_id", nullable = false)
     private PostEntity post;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private UserEntity user;
 }
