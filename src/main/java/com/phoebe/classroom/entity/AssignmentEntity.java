@@ -24,8 +24,4 @@ public class AssignmentEntity {
     private String attachment;
     private String instruction;
     private Long points;
-
-    @ManyToOne
-    @JoinColumn(name = "classroom_id")
-    private ClassroomEntity classroom;
 }

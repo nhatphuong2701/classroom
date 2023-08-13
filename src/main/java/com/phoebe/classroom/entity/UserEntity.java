@@ -36,13 +36,9 @@ public class UserEntity {
     private Gender gender;
 
     @Enumerated(EnumType.STRING)
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private UserRole role;
 
     private LocalDate dateOfBirth;
     private String avatar;
-
-    @OneToMany
-    @JoinColumn(name = "post_id", nullable = false)
-    private PostEntity post;
 }

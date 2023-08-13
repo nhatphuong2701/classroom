@@ -1,12 +1,18 @@
 package com.phoebe.classroom.service.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.*;
 
+import javax.json.bind.annotation.JsonbDateFormat;
+import javax.json.bind.annotation.JsonbTypeDeserializer;
+import javax.json.bind.annotation.JsonbTypeSerializer;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Getter
@@ -16,6 +22,10 @@ import java.time.LocalDateTime;
 @Builder
 public class Post {
     private Long id;
+
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonbDateFormat("yyyy-MM-dd''HH:mm:ss")
     private LocalDateTime postTime;
 
     @NotBlank
@@ -26,4 +36,5 @@ public class Post {
     private String title;
     private Long classroomId;
     private Long userId;
+    private List<Comment> commentList;
 }
