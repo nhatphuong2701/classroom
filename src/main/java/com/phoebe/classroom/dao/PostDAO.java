@@ -19,13 +19,11 @@ public class PostDAO extends BaseDAO<PostEntity> {
     @Override
     public List<PostEntity> findAll() {
         CriteriaBuilder cb = em.getCriteriaBuilder();
-
         CriteriaQuery<PostEntity> cq = cb.createQuery(PostEntity.class);
         Root<PostEntity> root = cq.from(PostEntity.class);
-        Fetch<PostEntity, UserEntity> userFetch = root.fetch("user", JoinType.LEFT);
-        userFetch.fetch("classroom", JoinType.LEFT);
+        root.fetch("user", JoinType.LEFT);
+        root.fetch("classroom", JoinType.LEFT);
         cq.select(root);
-
         return em.createQuery(cq).getResultList();
     }
 }

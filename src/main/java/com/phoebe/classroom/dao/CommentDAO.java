@@ -17,13 +17,10 @@ public class CommentDAO extends BaseDAO<CommentEntity> {
     @Override
     public List<CommentEntity> findAll() {
         CriteriaBuilder cb = em.getCriteriaBuilder();
-
         CriteriaQuery<CommentEntity> cq = cb.createQuery(CommentEntity.class);
         Root<CommentEntity> root = cq.from(CommentEntity.class);
-        Fetch<CommentEntity, PostEntity> postFetch = root.fetch("post", JoinType.LEFT);
-        postFetch.fetch("user", JoinType.LEFT);
-        cq.select(root);
-
+        root.fetch("post", JoinType.LEFT);
+        root.fetch("user", JoinType.LEFT);
         return em.createQuery(cq).getResultList();
     }
 }

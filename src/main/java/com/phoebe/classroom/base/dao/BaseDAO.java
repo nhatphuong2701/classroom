@@ -1,5 +1,6 @@
 package com.phoebe.classroom.base.dao;
 
+import com.phoebe.classroom.entity.PostEntity;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.EntityManager;
@@ -33,7 +34,19 @@ public abstract class BaseDAO<E> {
         return em.createQuery(cq).getResultList();
     }
 
+
     public Optional<E> findById(Long id) {
-        return Optional.of(em.find(entityClass, id));
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<E> cq = cb.createQuery(entityClass);
+        Root<E> root = cq.from(entityClass);
+
+        cq.select(root).where(cb.equal(root.get("id"), id));
+
+        return em.createQuery(cq).getResultList().stream().findFirst();
+    }
+
+    public E create(E entity) {
+        em.persist(entity);
+        return entity;
     }
 }

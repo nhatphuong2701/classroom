@@ -12,6 +12,7 @@ import java.util.List;
 @Mapper(componentModel = "cdi", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface CommentMapper extends EntityMapper<CommentEntity, Comment> {
     @Mapping(target = "postId", source = "post.id")
+    @Mapping(target = "userId", source = "user.id")
     @Override
     Comment toDto(CommentEntity entity);
 }

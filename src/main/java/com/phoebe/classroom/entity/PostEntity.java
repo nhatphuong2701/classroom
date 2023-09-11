@@ -29,14 +29,11 @@ public class PostEntity {
     private String attachment;
     private String title;
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "classroom_id", nullable = false)
     private ClassroomEntity classroom;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
-
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-    private List<CommentEntity> commentList;
 }

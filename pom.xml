@@ -27,6 +27,10 @@
         <maven-surefire-plugin-version>2.19</maven-surefire-plugin-version>
         <junit-platform-surefire-provider-version>1.0.0</junit-platform-surefire-provider-version>
         <validation-api-version>2.0.1.Final</validation-api-version>
+        <hibernate-validator-version>6.2.5.Final</hibernate-validator-version>
+        <commons-collections4-version>4.1</commons-collections4-version>
+        <org-apache-logging-log4j-version>2.20.0</org-apache-logging-log4j-version>
+        <jbcrypt-version>0.4</jbcrypt-version>
     </properties>
     <dependencies>
         <dependency>
@@ -79,8 +83,32 @@
             <version>${mockito-junit-jupiter-version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate-validator-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>${commons-collections4-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${org-apache-logging-log4j-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${org-apache-logging-log4j-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mindrot</groupId>
+            <artifactId>jbcrypt</artifactId>
+            <version>${jbcrypt-version}</version>
+        </dependency>
     </dependencies>
-
     <build>
         <finalName>classroom</finalName>
 
