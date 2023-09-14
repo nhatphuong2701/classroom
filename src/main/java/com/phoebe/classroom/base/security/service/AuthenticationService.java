@@ -14,7 +14,7 @@ public class AuthenticationService {
     @Inject
     private UserService userService;
     public boolean checkAuthentication(JwtRequest jwtRequest) throws AuthorizationException {
-        UserEntity user = userService.getByUsername(jwtRequest.getUserName());
+        UserEntity user = userService.getByUsername(jwtRequest.getUsername());
         return BCrypt.checkpw(jwtRequest.getPassword(), user.getPassword());
     }
 }

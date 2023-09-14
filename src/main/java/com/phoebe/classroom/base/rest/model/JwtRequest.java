@@ -1,6 +1,5 @@
 package com.phoebe.classroom.base.rest.model;
 
-import com.phoebe.classroom.base.exception.ErrorMessage;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
@@ -13,7 +12,7 @@ import javax.validation.constraints.NotBlank;
 public class JwtRequest {
 
     @NotBlank(message = "USERNAME_BLANK_OR_NULL")
-    private String userName;
+    private String username;
 
     @NotBlank(message = "PASSWORD_BLANK_OR_NULL")
     private String password;

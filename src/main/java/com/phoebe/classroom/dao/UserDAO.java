@@ -15,8 +15,8 @@ public class UserDAO extends BaseDAO<UserEntity> {
     }
 
     public Optional<UserEntity> findByUserName(String userName) {
-        List<UserEntity> userList = em.createQuery("SELECT u FROM UserEntity u WHERE u.userName = :userName", UserEntity.class)
-                .setParameter("userName", userName)
+        List<UserEntity> userList = em.createQuery("SELECT u FROM UserEntity u WHERE u.username = :username", UserEntity.class)
+                .setParameter("username", userName)
                 .getResultList();
         if(CollectionUtils.isNotEmpty(userList)) {
             return Optional.of(userList.get(0));

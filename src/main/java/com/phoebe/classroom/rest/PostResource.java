@@ -1,6 +1,8 @@
 package com.phoebe.classroom.rest;
 
+import com.phoebe.classroom.base.exception.AuthorizationException;
 import com.phoebe.classroom.base.exception.ResourceNotFoundException;
+import com.phoebe.classroom.base.security.JwtUtils;
 import com.phoebe.classroom.entity.PostEntity;
 import com.phoebe.classroom.service.PostService;
 import com.phoebe.classroom.service.mapper.PostMapper;
@@ -20,6 +22,8 @@ public class PostResource {
     @Inject
     private PostMapper postMapper;
 
+    @Inject
+    private JwtUtils jwtUtils;
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
@@ -37,11 +41,10 @@ public class PostResource {
     @POST
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public Response create(Post post) throws ResourceNotFoundException {
+    public Response create(@HeaderParam("Authorization") String authorization, Post post) throws ResourceNotFoundException, AuthorizationException {
+        jwtUtils.verifyUserIsTeacher(authorization);
         PostEntity postEntity = postService.create(post);
-        System.out.println("id:" + postEntity.getId());
         Post newPost = postMapper.toDto(postEntity);
-        System.out.println("id:" + newPost.getId());
         return Response.created(URI.create("posts" + newPost.getId())).entity(newPost).build();
     }
 }

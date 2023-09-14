@@ -18,7 +18,7 @@ public class ClassroomDAO extends BaseDAO<ClassroomEntity> {
     public Optional<List<ClassroomEntity>> getClassroomsByUserId(Long userId) {
         TypedQuery<ClassroomEntity> query = em.createQuery(
                 "SELECT c FROM ClassroomEntity c " +
-                        "JOIN c.participate p " +
+                        "JOIN ParticipateEntity p ON c.id = p.classroom.id " +
                         "JOIN p.user u " +
                         "WHERE u.id = :userId", ClassroomEntity.class);
 
